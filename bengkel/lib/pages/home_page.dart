@@ -137,7 +137,7 @@ class HomePage extends StatelessWidget {
                           buttonColor: Colors.red,
                           onConfirm: () {
                             controller.hapusService(item.id);
-                            Get.back(); // tutup dialog
+                            Get.back(); 
                           },
                         );
                       },
