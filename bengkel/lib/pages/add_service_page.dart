@@ -7,11 +7,11 @@ class AddServicePage extends StatelessWidget {
 
   final ServiceController controller = Get.find();
 
-  final namaController = TextEditingController();
-  final noHpController = TextEditingController();
-  final platController = TextEditingController();
-  final jenisController = TextEditingController();
-  final biayaController = TextEditingController();
+  final nama = TextEditingController();
+  final nohp = TextEditingController();
+  final plat = TextEditingController();
+  final jenis = TextEditingController();
+  final biaya = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,50 +37,59 @@ class AddServicePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: namaController,
-              decoration: InputDecoration(labelText: "Nama Customer"),
+      body: Center(
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: 700, 
             ),
-            TextField(
-              controller: noHpController,
-              decoration: InputDecoration(labelText: "No HP"),
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                controller: nama,
+                decoration: InputDecoration(labelText: "Nama Pelanggan"),
+              ),
+              TextField(
+                controller: nohp,
+                decoration: InputDecoration(labelText: "No HP"),
+              ),
+              TextField(
+                controller: plat,
+                decoration: InputDecoration(labelText: "Plat Nomor"),
+              ),
+              TextField(
+                controller: jenis,
+                decoration: InputDecoration(labelText: "Jenis Service"),
+              ),
+              TextField(
+                controller: biaya,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: "Biaya"),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  controller.tambahService(
+                    ServiceModel(
+                      id: DateTime.now().toString(),
+                      namaCustomer: nama.text,
+                      noHp: nohp.text,
+                      platNomor: plat.text,
+                      jenisService: jenis.text,
+                      biaya: double.parse(biaya.text),
+                    ),
+                  );
+                  Get.back();
+                },
+                child: Text("SIMPAN"),
+                )
+              ],
             ),
-            TextField(
-              controller: platController,
-              decoration: InputDecoration(labelText: "Plat Nomor"),
-            ),
-            TextField(
-              controller: jenisController,
-              decoration: InputDecoration(labelText: "Jenis Service"),
-            ),
-            TextField(
-              controller: biayaController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: "Biaya"),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                controller.tambahService(
-                  ServiceModel(
-                    id: DateTime.now().toString(),
-                    namaCustomer: namaController.text,
-                    noHp: noHpController.text,
-                    platNomor: platController.text,
-                    jenisService: jenisController.text,
-                    biaya: double.parse(biayaController.text),
-                  ),
-                );
-
-                Get.back();
-              },
-              child: Text("SIMPAN"),
-            )
-          ],
+          ),
+          ),
         ),
       ),
     );

@@ -16,24 +16,24 @@ class _EditServicePageState extends State<EditServicePage> {
 
   final ServiceController controller = Get.find();
 
-  late TextEditingController namaController;
-  late TextEditingController noHpController;
-  late TextEditingController platController;
-  late TextEditingController jenisController;
-  late TextEditingController biayaController;
+  late TextEditingController nama;
+  late TextEditingController nohp;
+  late TextEditingController plat;
+  late TextEditingController jenis;
+  late TextEditingController biaya;
 
   @override
   void initState() {
     super.initState();
-    namaController =
+    nama =
         TextEditingController(text: widget.service.namaCustomer);
-    noHpController =
+    nohp =
         TextEditingController(text: widget.service.noHp);
-    platController =
+    plat =
         TextEditingController(text: widget.service.platNomor);
-    jenisController =
+    jenis =
         TextEditingController(text: widget.service.jenisService);
-    biayaController =
+    biaya =
         TextEditingController(text: widget.service.biaya.toString());
   }
 
@@ -61,51 +61,61 @@ class _EditServicePageState extends State<EditServicePage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: namaController,
-              decoration: InputDecoration(labelText: "Nama Customer"),
-            ),
-            TextField(
-              controller: noHpController,
-              decoration: InputDecoration(labelText: "No HP"),
-            ),
-            TextField(
-              controller: platController,
-              decoration: InputDecoration(labelText: "Plat Nomor"),
-            ),
-            TextField(
-              controller: jenisController,
-              decoration: InputDecoration(labelText: "Jenis Service"),
-            ),
-            TextField(
-              controller: biayaController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: "Biaya"),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                controller.updateService(
-                  ServiceModel(
-                    id: widget.service.id,
-                    namaCustomer: namaController.text,
-                    noHp: noHpController.text,
-                    platNomor: platController.text,
-                    jenisService: jenisController.text,
-                    biaya: double.parse(biayaController.text),
-                  ),
-                );
-                Get.back();
-              },
-              child: Text("UPDATE"),
-            )
-          ],
+      body: Center(
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 700, // batas lebar maksimal
+              ),
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                controller: nama,
+                decoration: InputDecoration(labelText: "Nama Pelanggan"),
+              ),
+              TextField(
+                controller: nohp,
+                decoration: InputDecoration(labelText: "No HP"),
+              ),
+              TextField(
+                controller: plat,
+                decoration: InputDecoration(labelText: "Plat Nomor"),
+              ),
+              TextField(
+                controller: jenis,
+                decoration: InputDecoration(labelText: "Jenis Service"),
+              ),
+              TextField(
+                controller: biaya,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: "Biaya"),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  controller.updateService(
+                    ServiceModel(
+                      id: widget.service.id,
+                      namaCustomer: nama.text,
+                      noHp: nohp.text,
+                      platNomor: plat.text,
+                      jenisService: jenis.text,
+                      biaya: double.parse(biaya.text),
+                    ),
+                  );
+                  Get.back();
+                },
+                child: Text("UPDATE"),
+              )
+            ],
+          ),
+        ),
         ),
       ),
-    );
+    ),
+  );
   }
 }

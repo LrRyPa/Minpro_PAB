@@ -127,9 +127,20 @@ class HomePage extends StatelessWidget {
                       trailing: IconButton(
                         icon: Icon(Icons.delete,
                             color: Colors.red),
-                        onPressed: () =>
-                            controller.hapusService(
-                                item.id),
+                      onPressed: () {
+                        Get.defaultDialog(
+                          title: "Konfirmasi",
+                          middleText: "Apakah Anda yakin ingin menghapus data service ini?",
+                          textCancel: "Batal",
+                          textConfirm: "Hapus",
+                          confirmTextColor: Colors.white,
+                          buttonColor: Colors.red,
+                          onConfirm: () {
+                            controller.hapusService(item.id);
+                            Get.back(); // tutup dialog
+                          },
+                        );
+                      },
                       ),
                       onTap: () {
                         Get.to(() =>
