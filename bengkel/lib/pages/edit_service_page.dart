@@ -65,7 +65,7 @@ class _EditServicePageState extends State<EditServicePage> {
         child: SingleChildScrollView(
           child: ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: 700, // batas lebar maksimal
+                maxWidth: 700, 
               ),
           child: Padding(
             padding: EdgeInsets.all(20),
